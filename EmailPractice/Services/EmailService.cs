@@ -14,18 +14,18 @@ namespace EmailPractice.Services
                 await file.CopyToAsync(ms);
                 fileBytes = ms.ToArray();
             }
-            MailMessage mail = new MailMessage("modidhrumil6@gmail.com", toEmail, subject, body);
+            MailMessage mail = new MailMessage("", toEmail, subject, body);
             if (fileBytes != null)
             {
                 mail.Attachments.Add(new Attachment(new MemoryStream(fileBytes), file.FileName));
             }
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("modidhrumil6@gmail.com", "lkdifjiuvnhinqzi"),
+                Credentials = new NetworkCredential("", ""),
                 EnableSsl = true
             };
             await smtp.SendMailAsync(mail);
-            using SqlConnection con = new SqlConnection("Server=DHRUMIL_MODI\\SQLEXPRESS;Database=practice2;User Id=sa;" +
+            using SqlConnection con = new SqlConnection("Server=;Database=;User Id=sa;" +
                 "Password=admin@123;Encrypt=True;TrustServerCertificate=True;Pooling=false;");
             SqlCommand cmd = new SqlCommand(@"INSERT INTO EmailLog(ToEmail, Subject, Body, FileName, FileData)VALUES 
                                     (@To, @Sub, @Body, @File, @Data)", con);
@@ -39,3 +39,4 @@ namespace EmailPractice.Services
         }
     }
 }
+

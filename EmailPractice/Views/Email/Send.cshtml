@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Send Email";
+}
+<h2>Send Email</h2>
+<form method="post" enctype="multipart/form-data" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <input type="email" name="toEmail" placeholder="Recipient Email" required />
+    <br /><br />
+
+    <input type="text" name="subject" placeholder="Subject" required />
+    <br /><br />
+
+    <textarea name="body" placeholder="Message" required></textarea>
+    <br /><br />
+
+    <input type="file" name="file" />
+    <br /><br />
+
+    <button type="submit">Send Email</button>
+</form>
+@if (TempData["Msg"] != null)
+{
+    <p style="color:green">@TempData["Msg"]</p>
+
+    <script type="text/javascript">
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                // Page was restored from back-forward cache
+                document.querySelector("form").reset();
+            }
+        });
+    </script>
+}
